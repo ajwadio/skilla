@@ -34,7 +34,7 @@ export function Sidebar({ username, role, profilePic }: SidebarProps) {
   const displayProfilePic = profilePic || user?.imageUrl || `https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=${encodeURIComponent(displayUsername)}`;
 
   return (
-    <aside className="relative flex h-screen w-64 shrink-0 flex-col border-r border-zinc-800/50 bg-zinc-950 px-3 py-5">
+    <aside className="hidden md:flex fixed inset-y-0 left-0 z-50 h-screen w-64 shrink-0 flex-col border-r border-zinc-800/50 bg-zinc-950 px-3 py-5">
       {/* ── Brand ── */}
       <div className="mb-8 px-3">
         <span className="text-2xl font-black tracking-widest text-orange-500">

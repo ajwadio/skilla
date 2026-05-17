@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { Sidebar } from "@/components/sidebar";
 import { FloatingSearch } from "@/components/floating-search";
+import { MobileNav } from "@/components/mobile-nav";
 
 export const metadata: Metadata = {
   title: "Skilla",
@@ -29,7 +30,7 @@ export default async function DashboardLayout({
   if (!dbUser) redirect("/onboarding");
 
   return (
-    <div className="flex h-screen overflow-hidden bg-zinc-950">
+    <div className="flex h-screen overflow-hidden bg-zinc-950 relative">
       {/* ── Fixed Left Sidebar ── */}
       <Sidebar
         username={dbUser.username}
@@ -38,7 +39,7 @@ export default async function DashboardLayout({
       />
 
       {/* ── Right Main Panel ── */}
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col overflow-hidden md:pl-64 pb-20 md:pb-0">
         {/* Floating Search — pinned to top of right panel */}
         <header className="shrink-0 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
           <FloatingSearch />
@@ -49,6 +50,8 @@ export default async function DashboardLayout({
           {children}
         </main>
       </div>
+
+      <MobileNav />
     </div>
   );
 }

@@ -190,20 +190,22 @@ function ActivityHeatmap({ sessions }: { sessions: { createdAt: Date }[] }) {
       </div>
 
       <div className="flex flex-col gap-3">
-        <div className="grid grid-flow-col grid-rows-7 gap-1 overflow-x-auto pb-2">
-          {grid.map((dateStr, i) => {
-            if (!dateStr) {
-              return <div key={i} className="h-3.5 w-3.5 rounded-sm bg-transparent" />;
-            }
-            const count = counts[dateStr] || 0;
-            return (
-              <div
-                key={i}
-                title={`${count} session${count === 1 ? "" : "s"} on ${dateStr}`}
-                className={`h-3.5 w-3.5 rounded-sm ${getColor(count)}`}
-              />
-            );
-          })}
+        <div className="w-full overflow-x-auto scrollbar-none select-none pb-2">
+          <div className="grid grid-flow-col grid-rows-7 gap-1 w-max">
+            {grid.map((dateStr, i) => {
+              if (!dateStr) {
+                return <div key={i} className="h-3.5 w-3.5 rounded-sm bg-transparent" />;
+              }
+              const count = counts[dateStr] || 0;
+              return (
+                <div
+                  key={i}
+                  title={`${count} session${count === 1 ? "" : "s"} on ${dateStr}`}
+                  className={`h-3.5 w-3.5 rounded-sm ${getColor(count)} shrink-0`}
+                />
+              );
+            })}
+          </div>
         </div>
         
         <div className="flex items-center justify-end gap-2 text-xs text-zinc-500 font-medium">
@@ -271,7 +273,7 @@ export default async function ProgressPage() {
       </div>
 
       {/* ── Stat cards ── */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <StatCard
           icon={Flame}
           label="Total Output"

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useClerk, useUser } from "@clerk/nextjs";
-import { Home, Zap, BarChart2, LogOut, User, ChevronUp, Bell } from "lucide-react";
+import { Home, Zap, BarChart2, LogOut, User, ChevronUp, Bell, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface SidebarProps {
@@ -20,6 +20,7 @@ const NAV_ITEMS = [
   { label: "Home", href: "/home", icon: Home },
   { label: "Start", href: "/start", icon: Zap },
   { label: "Progress", href: "/progress", icon: BarChart2 },
+  { label: "Leaderboard", href: "/leaderboard", icon: Trophy },
   { label: "Notifications", href: "/notifications", icon: Bell },
 ] as const;
 

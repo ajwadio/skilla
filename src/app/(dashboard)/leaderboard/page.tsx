@@ -46,13 +46,13 @@ export default async function LeaderboardPage() {
 
   function getRankBadge(rank: number) {
     if (rank === 1) {
-      return <Trophy className="size-6 text-yellow-500 fill-yellow-500/20" title="1st Place" />;
+      return <span title="1st Place"><Trophy className="size-6 text-yellow-500 fill-yellow-500/20" /></span>;
     }
     if (rank === 2) {
-      return <Medal className="size-6 text-zinc-400 fill-zinc-400/20" title="2nd Place" />;
+      return <span title="2nd Place"><Medal className="size-6 text-zinc-400 fill-zinc-400/20" /></span>;
     }
     if (rank === 3) {
-      return <Medal className="size-6 text-amber-600 fill-amber-600/20" title="3rd Place" />;
+      return <span title="3rd Place"><Medal className="size-6 text-amber-600 fill-amber-600/20" /></span>;
     }
     return <span className="text-sm font-bold text-zinc-500 w-6 text-center">{rank}</span>;
   }

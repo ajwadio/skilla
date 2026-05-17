@@ -30,9 +30,6 @@ export default function RootLayout({
         baseTheme: dark,
         variables: {
           colorPrimary: "#f97316", // Mild Orange Tint as highlight/accent
-          colorBackground: "#09090b", // zinc-950
-          colorInputBackground: "#18181b", // zinc-900
-          colorInputText: "#f4f4f5", // zinc-100
         },
       }}
     >

@@ -1,0 +1,61 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  clerkId      String         @unique
+  username     String         @unique
+  name         String
+  profilePic   String?
+  role         String         
+  goals        String[]       
+  createdAt    DateTime       @default(now())
+  friendIds        String[]       @db.ObjectId
+  studySessions    StudySession[]
+  sentRequests     Friendship[]   @relation("SentRequests")
+  receivedRequests Friendship[]   @relation("ReceivedRequests")
+  comments         Comment[]
+}
+
+model StudySession {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  title       String   
+  description String?  
+  duration    Int      
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kudosIds    String[] @db.ObjectId
+  comments    Comment[]
+}
+
+model Friendship {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  senderId   String   @db.ObjectId
+  receiverId String   @db.ObjectId
+  status     String   // "PENDING" or "ACCEPTED"
+  createdAt  DateTime @default(now())
+
+  sender     User     @relation("SentRequests", fields: [senderId], references: [id])
+  receiver   User     @relation("ReceivedRequests", fields: [receiverId], references: [id])
+
+  @@unique([senderId, receiverId])
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  createdAt DateTime @default(now())
+  sessionId String   @db.ObjectId
+  userId    String   @db.ObjectId
+  
+  session   StudySession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
